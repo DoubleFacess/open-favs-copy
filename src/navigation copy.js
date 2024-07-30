@@ -113,11 +113,6 @@ export const headerData = {
     {
       text: 'Widgets',
       href: '#',
-      target: '_blank'
-    },
-    {
-      text: 'Production',
-      href: 'https://bookmarks-list.netlify.app/',
     },
   ],
   actions: [{ text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }],
