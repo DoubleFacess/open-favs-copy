@@ -41,7 +41,7 @@ export const headerData = {
     },
     {
       text: 'About',      
-      href: getPermalink('/homes/saas'),
+      href: getPermalink('/about'),
     },
     {
       text: 'Company',      

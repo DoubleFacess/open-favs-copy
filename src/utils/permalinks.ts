@@ -56,27 +56,21 @@ export const getPermalink = (slug = '', type = 'page'): string => {
     case 'home':
       permalink = getHomePermalink();
       break;
-
     case 'blog':
       permalink = getBlogPermalink();
       break;
-
     case 'asset':
       permalink = getAsset(slug);
       break;
-
     case 'category':
       permalink = createPath(CATEGORY_BASE, trimSlash(slug));
       break;
-
     case 'tag':
       permalink = createPath(TAG_BASE, trimSlash(slug));
       break;
-
     case 'post':
       permalink = createPath(trimSlash(slug));
       break;
-
     case 'page':
     default:
       permalink = createPath(slug);
@@ -88,6 +82,9 @@ export const getPermalink = (slug = '', type = 'page'): string => {
 
 /** */
 export const getHomePermalink = (): string => getPermalink('/');
+
+/** */
+export const getAboutPermalink = (): string => getPermalink('/about');
 
 /** */
 export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
