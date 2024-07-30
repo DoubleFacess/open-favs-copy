@@ -87,6 +87,9 @@ export const getHomePermalink = (): string => getPermalink('/');
 export const getAboutPermalink = (): string => getPermalink('/about');
 
 /** */
+export const getLoginPermalink = (): string => getPermalink('/login/signin');
+
+/** */
 export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
 
 /** */

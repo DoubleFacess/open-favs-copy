@@ -44,6 +44,10 @@ export const headerData = {
       href: getPermalink('/about'),
     },
     {
+      text: 'About',      
+      href: getPermalink('/about'),
+    },
+    {
       text: 'Company',      
       href: getPermalink('/homes/saas'),
     },
@@ -51,7 +55,12 @@ export const headerData = {
       text: 'Production',
       href: 'https://bookmarks-list.netlify.app/',
     },
-    
+    /*
+    {
+      text: 'Login',      
+      href: getPermalink('/login/signin'),
+    },
+    */    
   ],
   actions: [{ text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }],
 };
