@@ -19,19 +19,16 @@ const metadata = {
     subtitle="Insert your credentials or connect with belows providers"
     inputs={[
       {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
         type: 'email',
         name: 'email',
         label: 'Email',
       },
+      {
+        type: 'password',
+        name: 'password',
+        label: 'Password',
+      },
     ]}
-    textarea={{
-      label: 'Message',
-    }}
     disclaimer={{
       label:
         'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
