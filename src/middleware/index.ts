@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware'
 import { supabase } from '../providers/supabase'
 
-const protectedRoutes = ['/dashboard', '/main']
+const protectedRoutes = ['/dashboard', '/main', 'dashboard-dev']
 const redirectRoutes = ['/login/signin', '/login/register']
 
 export const onRequest = defineMiddleware(
@@ -48,7 +48,7 @@ export const onRequest = defineMiddleware(
       const refreshToken = cookies.get('sb-refresh-token')
 
       if (accessToken && refreshToken) {
-        return redirect('/dashboard')
+        return redirect('/dashboard-dev')
       }
     }
     return next()
