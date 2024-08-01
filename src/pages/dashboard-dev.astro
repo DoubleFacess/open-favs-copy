@@ -1,17 +1,19 @@
 ---
-import Layout from '~/layouts/ProdPageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import Prices from '~/components/widgets/Pricing.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import Layout from '~/layouts/ProdPageLayout.astro'
+import HeroText from '~/components/widgets/HeroText.astro'
+import Prices from '~/components/widgets/Pricing.astro'
+import FAQs from '~/components/widgets/FAQs.astro'
+import Steps from '~/components/widgets/Steps.astro'
+import Features3 from '~/components/widgets/Features3.astro'
+import CallToAction from '~/components/widgets/CallToAction.astro'
 
-const { email } = Astro.locals
+import { supabase } from '../providers/supabase'
+
+const { email, user_name } = Astro.locals
 const metadata = {
   title: 'Welcome',
 };
-const test: string = 'hello world'
+
 /*console.log('hello from morocco from ' + email)
 console.log(Astro.locals)
 */
@@ -22,12 +24,9 @@ console.log(Astro.locals)
 
     <HeroText
         tagline="Dashboard"
-        title={`welcome ${email? email : 'unknow user'}`}
+        title={`welcome ${email? user_name : 'unknow user'}`}
         subtitle="Choose the perfect plan that aligns with your cosmic goals."
     />
-    
-    <p>{test}</p>
-
     <!-- Pricing Widget ******************* -->
 
   <Prices

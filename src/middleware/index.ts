@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware'
 import { supabase } from '../providers/supabase'
 
-const protectedRoutes = ['/dashboard', '/main', 'dashboard-dev']
+const protectedRoutes = ['/dashboard', '/main', '/dashboard-dev']
 const redirectRoutes = ['/login/signin', '/login/register']
 
 export const onRequest = defineMiddleware(
@@ -22,25 +22,27 @@ export const onRequest = defineMiddleware(
       if (error) {
         cookies.delete('sb-access-token', {
           path: '/',
-        });
+        })
         cookies.delete('sb-refresh-token', {
           path: '/',
-        });
+        })
         return redirect('/login/signin')
       }
       console.log('auth data', data)
       locals.email = data.user?.email!
       locals.id = data.user?.id!
+      const [username, domain] = locals.email.split('@');
+      locals.user_name = username
       cookies.set('sb-access-token', data?.session?.access_token!, {
         sameSite: 'strict',
         path: '/',
         secure: true,
-      });
+      })
       cookies.set('sb-refresh-token', data?.session?.refresh_token!, {
         sameSite: 'strict',
         path: '/',
         secure: true,
-      });
+      })
     }
 
     if (redirectRoutes.includes(url.pathname) || redirectRoutes.includes(url.pathname.replace(/\/$/, ''))) {
@@ -53,4 +55,4 @@ export const onRequest = defineMiddleware(
     }
     return next()
   },
-);
+)
