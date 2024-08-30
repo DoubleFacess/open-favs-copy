@@ -39,6 +39,7 @@ export default defineConfig({
         tabler: ['*'],
         'flat-color-icons': [
           'template',
+          'bookmark',
           'gallery',
           'approval',
           'document',
@@ -47,6 +48,7 @@ export default defineConfig({
           'voice-presentation',
           'business-contact',
           'database',
+          'workflow'
         ],
       },
     }),
