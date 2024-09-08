@@ -34,7 +34,22 @@ export const POST: APIRoute = async ({ request }) => {
   const { id_cat, id_sub_cat, ratings, url, description, name, title, id_provider, user_id, AI } = await request.json()
   const { data, error } = await supabase
     .from('main_table')
-    .insert({ id_cat, id_sub_cat, ratings, url, description, name, title, id_provider, user_id, AI })
+    /*
+    id?: number,       
+    type: string,    
+    */
+    .insert({      
+      name,
+      title,
+      description, 
+      url,
+      id_provider,
+      user_id,
+      AI,
+      id_cat,
+      id_sub_cat,
+      ratings
+    })
     .select()
 
   if (error) {
