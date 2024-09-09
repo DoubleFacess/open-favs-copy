@@ -9,7 +9,8 @@ export const GET: APIRoute = async () => {
         id,
         area,
         category,
-        sub_categories(            
+        sub_categories(
+            id,
             sub_category
         )
     )`)   
