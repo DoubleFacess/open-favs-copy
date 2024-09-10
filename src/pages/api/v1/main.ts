@@ -43,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
       url,
       id_provider,
       user_id,
-      AI,
+      AI: AI ? true : false,
       ratings,
     })
     .select();
