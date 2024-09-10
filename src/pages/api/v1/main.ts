@@ -56,23 +56,31 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 500 },
     );
   }
+  
+  const id = insertData ? insertData[0].id : 999
 
-  const id = insertData ? insertData[0].id : null;
+  
 
   // Prepara il payload per la tabella categories_tags
   const payload = {
     id,
-    AI_think,
-    id_cat: id_cat?.id ?? 0,
-    tag_3: tag_3?.id ?? 0,  // Imposta 0 se il valore è null o undefined
-    tag_4: tag_4?.id ?? 0,
-    tag_5: tag_5?.id ?? 0
+    tag_3: tag_3 ? tag_3 : -1,
+    AI,
+    id_cat: id_cat ? id_cat : -1,
+    AI_think,   
+    tag_4: tag_4 ? tag_4 : -1,
+    tag_5: tag_5 ? tag_5 : -1
   }
-
+  
   // Inserisci nella tabella categories_tags
+
+  console.log('ids: ', id_cat, tag_3, tag_4, tag_5)
   const { data: tagData, error: tagError } = await supabase
+    
     .from('categories_tags')
-    .insert(payload);
+    .insert(payload)  
+    .select()
+  
 
   if (tagError) {
     return new Response(
@@ -82,6 +90,6 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 500 },
     );
   }
-
+  console.log(tagData)
   return new Response(JSON.stringify(tagData), { status: 200 });
 }
