@@ -57,13 +57,13 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
   
-  const id = insertData ? insertData[0].id : 999
+  const id_main = insertData ? insertData[0].id_main : -1
 
   
 
   // Prepara il payload per la tabella categories_tags
   const payload = {
-    id,
+    id_main,
     tag_3: tag_3 ? tag_3 : -1,
     AI,
     id_cat: id_cat ? id_cat : -1,
