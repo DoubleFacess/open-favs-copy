@@ -120,7 +120,7 @@ export const POST: APIRoute = async ({ request }) => {
     accessible: accessible ? true : false,
     domain_exists:  domain_exists ? true : false,
     html_content_exists:  html_content_exists ? true : false,
-    redirect_exists:  redirect_exists ? true : false,
+    //redirect_exists:  redirect_exists ? true : false,
     secure: secure ? true : false,
     status_code,
     valid_url: valid_url ? true : false 
