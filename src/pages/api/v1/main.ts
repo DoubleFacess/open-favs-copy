@@ -69,7 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
       AI: AI ? true : false,
       ratings,
     })
-    .select();
+    .select()
 
   if (insertError) {
     return new Response(
@@ -77,7 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
         error: insertError.message,
       }),
       { status: 500 },
-    );
+    )
   }
   
   const id_main = insertData ? insertData[0].id : -1  
@@ -95,6 +95,7 @@ export const POST: APIRoute = async ({ request }) => {
   // Inserisci nella tabella categories_tags
 
   console.log('ids: ', id_cat, tag_3, tag_4, tag_5)
+
   const { data: tagData, error: tagError } = await supabase
     
     .from('categories_tags')
@@ -115,6 +116,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const payload_sub_main_table = {
     id_src: id_main ? id_main : null,
+    user_id,
     accessible: accessible ? true : false,
     domain_exists:  domain_exists ? true : false,
     html_content_exists:  html_content_exists ? true : false,
@@ -130,8 +132,16 @@ export const POST: APIRoute = async ({ request }) => {
     .insert(payload_sub_main_table)  
     .select()
 
+    if (subError) {
+      return new Response(
+        JSON.stringify({
+          error: subError.message,
+        }),
+        { status: 500 },
+      )
+    }
   const msg = 'inserimento avvenuto con successo'
 
   return new Response(JSON.stringify({'msg': msg}), { status: 200 })
-  
+
 }
