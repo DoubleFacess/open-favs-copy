@@ -31,65 +31,20 @@ export const GET: APIRoute = async () => {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const { name, title, description, url, ratings, id_provider, user_id, AI, AI_think, id_cat, tag_3, tag_4, tag_5} = await request.json();
-
-  // Inserisci nella tabella main_table e seleziona l'ID
-  const { data: insertData, error: insertError } = await supabase
+  const { id_cat, id_sub_cat, ratings, url, description, name, title, id_provider, user_id, AI } = await request.json()
+  const { data, error } = await supabase
     .from('main_table')
-    .insert({
-      name,
-      title,
-      description,
-      url,
-      id_provider,
-      user_id,
-      AI,
-      ratings,
-    })
-    .select();
-
-  if (insertError) {
-    return new Response(
-      JSON.stringify({
-        error: insertError.message,
-      }),
-      { status: 500 },
-    );
-  }
-  
-  const id = insertData ? insertData[0].id : 999
-
-  
-
-  // Prepara il payload per la tabella categories_tags
-  const payload = {
-    id,
-    tag_3: tag_3 ? tag_3 : -1,
-    AI,
-    id_cat: id_cat ? id_cat : -1,
-    AI_think,   
-    tag_4: tag_4 ? tag_4 : -1,
-    tag_5: tag_5 ? tag_5 : -1
-  }
-  
-  // Inserisci nella tabella categories_tags
-
-  console.log('ids: ', id_cat, tag_3, tag_4, tag_5)
-  const { data: tagData, error: tagError } = await supabase
-    
-    .from('categories_tags')
-    .insert(payload)  
+    .insert({ id_cat, id_sub_cat, ratings, url, description, name, title, id_provider, user_id, AI })
     .select()
-  
 
-  if (tagError) {
+  if (error) {
     return new Response(
       JSON.stringify({
-        error: tagError.message,
+        error: error.message,
       }),
       { status: 500 },
     );
   }
-  console.log(tagData)
-  return new Response(JSON.stringify(tagData), { status: 200 });
+
+  return new Response(JSON.stringify(data))
 }
