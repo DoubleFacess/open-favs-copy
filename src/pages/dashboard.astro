@@ -11,11 +11,53 @@ import Features3 from '~/components/widgets/Features3.astro'
 import FAQs from '~/components/widgets/FAQs.astro'
 import Brands from '~/components/widgets/Brands.astro'
 
-
+import { getCategories, getMain } from '~/scripts/requests'
+import { numElements } from '~/scripts/utils-functional'
 
 const metadata = {
   title: 'Startup Landing Page',
-};
+}
+
+
+
+const categories = await getCategories()
+const mainData = await getMain()
+
+const areas = [...new Set(categories.map(category => category.area))]
+const titles = mainData.map(item => item.title)
+
+const numAreas = areas.length //numero di aree
+const numSites = numElements(mainData)
+
+const titlesOcc = titles.reduce((acc, title) => {
+  acc[title] = (acc[title] || 0) + 1
+  return acc
+}, {})
+
+console.log('numSites', numSites)
+
+
+/*
+// Per contare le occorrenze dei titoli (ad esempio), puoi usare un oggetto di mappatura
+const titleOccurrences = titles.reduce((acc, title) => {
+  acc[title] = (acc[title] || 0) + 1;
+  return acc;
+}, {});
+
+const nameOccurrences = names.reduce((acc, name) => {
+  acc[name] = (acc[name] || 0) + 1;
+  return acc;
+}, {});
+
+const urlOccurrences = urls.reduce((acc, url) => {
+  acc[url] = (acc[url] || 0) + 1;
+  return acc;
+}, {});
+
+*/
+
+
+console.log(areas)
 ---
 
 <Layout metadata={metadata}>
@@ -127,7 +169,7 @@ const metadata = {
     columns={3}
     items={[
       {
-        title: 'Recent Addictions (0)',
+        title: `Recent Addictions (${numSites})`,
         description:
           'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
         
@@ -150,9 +192,9 @@ const metadata = {
        
       },
       {
-        title: 'Blog',
+        title: `Interests areas (${numAreas})`,
         description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
+          "These are the areas of interest that you can explore on our platform. Each area is designed to offer a wealth of resourcesand tools to enhance your experience. If you desire expanding our current topics or introducing new areas, we’d love to hear from you. Feel free to contact us!",
        
       },
       {
