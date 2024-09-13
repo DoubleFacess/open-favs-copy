@@ -23,29 +23,40 @@ interface MainFormData {
   AI: boolean
 }
 
-/*
-let siteObj = {  
-  domain: null,
-  author: null,
-  canonical: null,
-  image: null,
-  icon: null,
-  logo: null,
-  keywords: null,    
-  id_cat: null,
-  id_sub_cat: null,
-  ratings: null,  
-  id_provider: null,
-  AI: null,
-  AI_think: null,
-  AI_summary: null,
-  tag_1: null,
-  tag_2: null,
-  tag_3: null,
-  tag_4: null,
-  tag_5: null
+interface PostData {
+  user_id: string,
+  name: string,
+  title: string,
+  description: string,
+  url: string,
+  domain: string,
+  type: string,
+  author: string,
+  canonical: string,
+  image: string,
+  icon: string,
+  logo: string,
+  keywords: [],    
+  id_cat: number,
+  id_sub_cat: number,
+  ratings: number,  
+  id_provider: number,
+  AI: boolean,
+  AI_think: string,
+  AI_summary: string,
+  tag_1: number,
+  id_cat: number,
+  tag_3: number,
+  tag_4: number,
+  tag_5: number,
+  accessible: boolean,
+  domain_exists: boolean,
+  html_content_exists: boolean,
+  redirect_exists: boolean,
+  secure: boolean,
+  status_code: number,
+  valid_url: boolean
 }
-*/
 
 interface SubMainFormData {
   id_src: string,

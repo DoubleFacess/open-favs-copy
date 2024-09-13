@@ -50,7 +50,7 @@ export const onRequest = defineMiddleware(
       const refreshToken = cookies.get('sb-refresh-token')
 
       if (accessToken && refreshToken) {
-        return redirect('/dashboard-dev')
+        return redirect('/dashboard')
       }
     }
     return next()
