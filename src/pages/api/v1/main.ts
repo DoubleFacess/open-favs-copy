@@ -17,6 +17,11 @@ export const GET: APIRoute = async () => {
         tag_3,
         tag_4,
         tag_5
+      ),
+      sub_main_table (
+        accessible,
+        status_code,
+        valid_url
       )
     `)   
     //.order("id", { ascending: true });
