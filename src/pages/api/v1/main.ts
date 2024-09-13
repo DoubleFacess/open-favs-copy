@@ -7,13 +7,16 @@ export const GET: APIRoute = async () => {
     .from('main_table').select(`
       id,
       name,
-      id_cat,
+      title,      
       ratings,
       url,
       description,    
-      main_category (
-        id, 
-        cat_name 
+      categories_tags (
+        id_main,
+        id_cat,
+        tag_3,
+        tag_4,
+        tag_5
       )
     `)   
     //.order("id", { ascending: true });
