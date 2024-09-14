@@ -73,8 +73,7 @@ export const POST: APIRoute = async ({ request }) => {
       description,
       url,
       id_provider,
-      user_id,
-      AI: AI ? true : false,
+      user_id,      
       ratings,
     })
     .select()
@@ -132,7 +131,8 @@ export const POST: APIRoute = async ({ request }) => {
     secure: secure ? true : false,
     status_code,
     valid_url: valid_url ? true : false,
-    type
+    type,
+    AI: AI ? true : false
   }
 
   const { data: subData, error: subError } = await supabase
