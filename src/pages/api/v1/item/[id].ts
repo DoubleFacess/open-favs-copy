@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { supabase } from '../../../providers/supabase'
+import { supabase } from '../../../../providers/supabase'
 
 export const GET: APIRoute = async ({ params }) => {
     const { id } = params;  // Supponiamo che l'ID venga passato come parametro dell'URL
