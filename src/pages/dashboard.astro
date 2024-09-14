@@ -11,23 +11,34 @@ import Features3 from '~/components/widgets/Features3.astro'
 import FAQs from '~/components/widgets/FAQs.astro'
 import Brands from '~/components/widgets/Brands.astro'
 
-import { getCategories, getMain } from '~/scripts/requests'
+import { getCategories, getItem, getMain } from '~/scripts/requests'
 import { numElements } from '~/scripts/utils-functional'
 
 const metadata = {
   title: 'Startup Landing Page',
 }
 
+//getItem
 
+/* fetch db */
 
 const categories = await getCategories()
 const mainData = await getMain()
+const testItem = await getItem(300)
+
+console.log(testItem)
+
+/* map results */
 
 const areas = [...new Set(categories.map(category => category.area))]
 const titles = mainData.map(item => item.title)
 
-const numAreas = areas.length //numero di aree
+
+/* count results */
+//const numAreas = areas.length //numero di aree
+const numAreas = numElements(areas)
 const numSites = numElements(mainData)
+
 
 const titlesOcc = titles.reduce((acc, title) => {
   acc[title] = (acc[title] || 0) + 1

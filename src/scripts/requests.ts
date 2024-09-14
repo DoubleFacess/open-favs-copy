@@ -67,6 +67,16 @@ export const getInfo = async (url: string) => {
   }
 }
 
+export const getItem = async (id: number) => {
+  try {
+    const response = await fetch(`${api_url}/item/${id}`)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const getMain = async () => {
   try {
     const response = await fetch(api_url + 'main')
