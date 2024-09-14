@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
     name, 
     title, 
     description, 
-    url, 
+    url,
     ratings, 
     id_provider, 
     user_id, 
@@ -60,8 +60,8 @@ export const POST: APIRoute = async ({ request }) => {
     redirect_exists, 
     secure, 
     status_code, 
-    valid_url
-
+    valid_url,
+    type
   } = await request.json()
 
   // Inserisci nella tabella main_table e seleziona l'ID
@@ -131,7 +131,8 @@ export const POST: APIRoute = async ({ request }) => {
     //redirect_exists:  redirect_exists ? true : false,
     secure: secure ? true : false,
     status_code,
-    valid_url: valid_url ? true : false 
+    valid_url: valid_url ? true : false,
+    type
   }
 
   const { data: subData, error: subError } = await supabase
