@@ -1,54 +1,8 @@
-// Importa la libreria 'slugify' per trasformare stringhe in slug leggibili
-import slugify from 'limax';
+import {trimSlash , createPath, cleanSlug, getCanonical} from './permalinks-utils'
 
-// Importa le configurazioni per il sito e il blog
-import { SITE, APP_BLOG } from 'astrowind:config';
+import { SITE, APP_BLOG } from 'astrowind:config' // Importa le configurazioni per il sito e il blog
 
-// Importa una funzione utilitaria per rimuovere spazi bianchi da una stringa
-import { trim } from '~/utils/utils';
-
-/**
- * Rimuove eventuali barre '/' all'inizio e alla fine di una stringa.
- * @param {string} s - La stringa da elaborare.
- * @returns {string} - La stringa senza barre iniziali e finali.
- */
-export const trimSlash = (s: string) => trim(trim(s, '/'));
-
-/**
- * Combina i segmenti di percorso in una singola stringa di percorso.
- * Rimuove barre iniziali e finali extra e aggiunge una barra finale se necessario.
- * @param {...string} params - Segmenti di percorso da combinare.
- * @returns {string} - Il percorso combinato.
- */
-const createPath = (...params: string[]) => {
-  console.log('create path');
-  console.log('params', params);
-
-  // Pulisce e combina i segmenti di percorso
-  const paths = params
-    .map((el) => trimSlash(el))
-    .filter((el) => !!el)
-    .join('/');
-
-  // Restituisce il percorso combinato con una barra finale se necessario
-  console.log('/' + paths + (SITE.trailingSlash && paths ? '/' : ''));
-  return '/' + paths + (SITE.trailingSlash && paths ? '/' : '');
-};
-
-// Imposta il percorso base per il sito, usa '/' se non definito
-const BASE_PATHNAME = SITE.base || '/';
-
-/**
- * Pulisce e trasforma una stringa in uno slug valido.
- * Rimuove spazi e caratteri speciali, e separa i segmenti con '/'.
- * @param {string} text - La stringa da trasformare in slug.
- * @returns {string} - La stringa trasformata in uno slug.
- */
-export const cleanSlug = (text = '') =>
-  trimSlash(text)
-    .split('/')
-    .map((slug) => slugify(slug))
-    .join('/');
+const BASE_PATHNAME = SITE.base || '/' // Imposta il percorso base per il sito, usa '/' se non definito
 
 // Crea gli slug base per blog, categorie e tag
 export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
@@ -57,25 +11,6 @@ export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
 // Crea un modello di permalink per i post del blog
 export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
-
-/**
- * Crea un URL canonico basato sul percorso fornito.
- * Aggiunge o rimuove una barra finale a seconda della configurazione del sito.
- * @param {string} [path=''] - Il percorso da convertire in URL canonico.
- * @returns {string | URL} - L'URL canonico.
- */
-export const getCanonical = (path = ''): string | URL => {
-  console.log('get canonical');
-  const url = String(new URL(path, SITE.site));
-
-  // Aggiusta la barra finale dell'URL in base alla configurazione del sito
-  if (SITE.trailingSlash == false && path && url.endsWith('/')) {
-    return url.slice(0, -1);
-  } else if (SITE.trailingSlash == true && path && !url.endsWith('/')) {
-    return url + '/';
-  }
-  return url;
-};
 
 /**
  * Genera un permalink basato sul tipo di percorso e sullo slug fornito.
