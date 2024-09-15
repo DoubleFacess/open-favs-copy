@@ -11,7 +11,7 @@ import Features3 from '~/components/widgets/Features3.astro'
 import FAQs from '~/components/widgets/FAQs.astro'
 import Brands from '~/components/widgets/Brands.astro'
 
-import { getCategories, getItem, getMain } from '~/scripts/requests'
+import { getCategories, getItem, getMain, getLists } from '~/scripts/requests'
 import { numElements } from '~/scripts/utils-functional'
 
 const metadata = {
@@ -24,9 +24,11 @@ const metadata = {
 
 const categories = await getCategories()
 const mainData = await getMain()
-const testItem = await getItem(300)
+const lists = await getLists()
+//const testItem = await getItem(300)
 
-console.log(testItem)
+
+//onsole.log(testItem)
 
 /* map results */
 
@@ -38,6 +40,9 @@ const titles = mainData.map(item => item.title)
 //const numAreas = areas.length //numero di aree
 const numAreas = numElements(areas)
 const numSites = numElements(mainData)
+const numLists = numElements(lists)
+
+console.log(lists)
 
 
 const titlesOcc = titles.reduce((acc, title) => {
@@ -186,7 +191,7 @@ console.log(areas)
         
       },
       {
-        title: 'Custom Lists s (0)',
+        title: `Custom Lists (${numLists})`,
         description:
           'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
         

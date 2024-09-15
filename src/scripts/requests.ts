@@ -77,6 +77,16 @@ export const getItem = async (id: number) => {
   }
 }
 
+export const getLists = async () => {
+  try {
+    const response = await fetch(api_url + 'lists')    
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const getMain = async () => {
   try {
     const response = await fetch(api_url + 'main')

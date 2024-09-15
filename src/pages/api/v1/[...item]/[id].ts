@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ params }) => {
       title,
       description        
     `)
-    .eq('id', 300) 
+    .eq('id', id) 
 
     if (error) {
       return new Response(
