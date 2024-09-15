@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: OpenFav
+  site: 'https://open-favs.vercel.app'
   base: '/'
   trailingSlash: false
 
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: Open Favs
+    default: OpenFav
     template: '%s — AstroWind'
   description: "Welcome in the productivity platform for developers, easily manage resources and productivity"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: Openfavs
+    site_name: Openfav
     images:
       - url: '~/assets/images/default.png'
         width: 1200
